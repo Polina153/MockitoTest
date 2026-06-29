@@ -1,4 +1,4 @@
-package com.example.mockitotest.view
+package com.example.mockitotest.view.search
 
 import com.example.mockitotest.model.SearchResult
 import android.annotation.SuppressLint
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mockitotest.databinding.ListItemBinding
-import com.example.mockitotest.view.SearchResultAdapter.SearchResultViewHolder
+import com.example.mockitotest.view.search.SearchResultAdapter.SearchResultViewHolder
 
 
 internal class SearchResultAdapter : RecyclerView.Adapter<SearchResultViewHolder>() {

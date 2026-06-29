@@ -3,7 +3,7 @@ package com.example.mockitotest
 import ViewContract
 import com.example.mockitotest.model.SearchResponse
 import com.example.mockitotest.model.SearchResult
-import com.example.mockitotest.presenter.SearchPresenter
+import com.example.mockitotest.presenter.search.SearchPresenter
 import com.example.mockitotest.repository.GitHubRepository
 import org.junit.Assert.*
 import org.junit.Before

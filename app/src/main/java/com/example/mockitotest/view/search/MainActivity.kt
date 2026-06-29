@@ -1,4 +1,4 @@
-package com.example.mockitotest.view
+package com.example.mockitotest.view.search
 
 import ViewContract
 import android.annotation.SuppressLint
@@ -15,18 +15,20 @@ import com.example.mockitotest.R
 import com.example.mockitotest.databinding.ActivityMainBinding
 import com.example.mockitotest.model.SearchResult
 import com.example.mockitotest.presenter.PresenterContract
-import com.example.mockitotest.presenter.SearchPresenter
+import com.example.mockitotest.presenter.search.SearchPresenter
 import com.example.mockitotest.repository.GitHubApi
 import com.example.mockitotest.repository.GitHubRepository
+import com.example.mockitotest.view.details.DetailsActivity
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
 class MainActivity : AppCompatActivity(), ViewContract {
 
     private lateinit var binding: ActivityMainBinding
     private val adapter = SearchResultAdapter()
     private val presenter: PresenterContract = SearchPresenter(this, createRepository())
+
+    private var totalCount: Int = 0
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +42,15 @@ class MainActivity : AppCompatActivity(), ViewContract {
             insets
         }
         setUI()
+
     }
 
     private fun setUI() {
+        binding.toDetailsActivityButton.setOnClickListener {
+            startActivity(
+                DetailsActivity.getIntent(this, totalCount)
+            )
+        }
         setQueryListener()
         setRecyclerView()
     }
@@ -87,9 +95,11 @@ class MainActivity : AppCompatActivity(), ViewContract {
         searchResults: List<SearchResult>,
         totalCount: Int
     ) {
+        this.totalCount = totalCount
         adapter.updateResults(searchResults)
-        binding.resultsCountTextView.text =
-            String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
+
+        //binding.resultsCountTextView.text =
+        //    String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
     }
 
     override fun displayError() {

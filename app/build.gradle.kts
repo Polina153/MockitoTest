@@ -27,6 +27,13 @@ android {
             )
         }
     }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = false
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -54,4 +61,13 @@ dependencies {
     testImplementation("org.mockito:mockito-core:2.19.0")
     testImplementation("org.mockito:mockito-inline:2.8.9")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.1")
+
+    //Robolectric
+    testImplementation("org.robolectric:robolectric:4.5.1")
+    testImplementation("androidx.test:core:1.3.0")
+    testImplementation("androidx.test:runner:1.3.0")
+    testImplementation("androidx.test.ext:junit:1.1.2")
+    testImplementation("androidx.test.ext:truth:1.3.0")
+    //testImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    testImplementation("androidx.test.espresso:espresso-intents:3.3.0")
 }
