@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity(), ViewContract {
                 val query = binding.searchEditText.text.toString()
                 if (query.isNotBlank()) {
                     presenter.searchGitHub(query)
+                    binding.totalCountTextView.visibility = View.VISIBLE
                     return@OnEditorActionListener true
                 } else {
                     Toast.makeText(
@@ -89,20 +90,20 @@ class MainActivity : AppCompatActivity(), ViewContract {
     }
 
 
- /*   private fun createRepository(): RepositoryContract {
-        return if (BuildConfig.TYPE == FAKE) {
-            FakeGitHubRepository()
-        } else {
-            GitHubRepository(createRetrofit().create(GitHubApi::class.java))
-        }
-    }*/
+    /*   private fun createRepository(): RepositoryContract {
+           return if (BuildConfig.TYPE == FAKE) {
+               FakeGitHubRepository()
+           } else {
+               GitHubRepository(createRetrofit().create(GitHubApi::class.java))
+           }
+       }*/
 
     override fun displaySearchResults(
         searchResults: List<SearchResult>,
         totalCount: Int
     ) {
         adapter.updateResults(searchResults)
-        binding.resultsCountTextView.text =
+        binding.totalCountTextView.text =
             String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
     }
 

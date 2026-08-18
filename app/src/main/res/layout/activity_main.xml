@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -14,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <EditText
         android:id="@+id/searchEditText"
@@ -26,7 +28,8 @@
         android:maxLines="1"
         android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <Button
         android:id="@+id/toDetailsActivityButton"
@@ -34,14 +37,20 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
         android:text="@string/to_details"
-        app:layout_constraintTop_toBottomOf="@id/searchEditText" />
+        app:layout_constraintTop_toBottomOf="@id/searchEditText"
+        />
 
     <TextView
-        android:id="@+id/resultsCountTextView"
+        android:id="@+id/totalCountTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin"
-        app:layout_constraintTop_toBottomOf="@id/searchEditText"
+        android:gravity="center_horizontal"
+        android:text="@string/results_count"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toDetailsActivityButton"
+        tools:text="Number of results: 100"
         />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -50,5 +59,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/resultsCountTextView" />
+        app:layout_constraintTop_toBottomOf="@id/totalCountTextView"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
