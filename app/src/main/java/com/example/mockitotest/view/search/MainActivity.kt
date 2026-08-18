@@ -1,4 +1,4 @@
-package com.example.mockitotest.view
+package com.example.mockitotest.view.search
 
 import ViewContract
 import android.annotation.SuppressLint
@@ -18,15 +18,17 @@ import com.example.mockitotest.presenter.PresenterContract
 import com.example.mockitotest.presenter.SearchPresenter
 import com.example.mockitotest.repository.GitHubApi
 import com.example.mockitotest.repository.GitHubRepository
+import com.example.mockitotest.view.details.DetailsActivity
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
+import java.util.Locale
 
 class MainActivity : AppCompatActivity(), ViewContract {
 
     private lateinit var binding: ActivityMainBinding
     private val adapter = SearchResultAdapter()
     private val presenter: PresenterContract = SearchPresenter(this, createRepository())
+    private var totalCount: Int = 0
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +45,9 @@ class MainActivity : AppCompatActivity(), ViewContract {
     }
 
     private fun setUI() {
+        binding.toDetailsActivityButton.setOnClickListener {
+            startActivity(DetailsActivity.getIntent(this, totalCount))
+        }
         setQueryListener()
         setRecyclerView()
     }
@@ -83,6 +88,15 @@ class MainActivity : AppCompatActivity(), ViewContract {
             .build()
     }
 
+
+ /*   private fun createRepository(): RepositoryContract {
+        return if (BuildConfig.TYPE == FAKE) {
+            FakeGitHubRepository()
+        } else {
+            GitHubRepository(createRetrofit().create(GitHubApi::class.java))
+        }
+    }*/
+
     override fun displaySearchResults(
         searchResults: List<SearchResult>,
         totalCount: Int
@@ -110,5 +124,6 @@ class MainActivity : AppCompatActivity(), ViewContract {
 
     companion object {
         const val BASE_URL = "https://api.github.com"
+        const val FAKE = "FAKE"
     }
 }
